@@ -31,5 +31,5 @@ async def exit_gpt_mode(message: types.Message, state: FSMContext):
 @router.message(GPTStates.wait_for_question, F.text)
 async def gpt_answer(message: types.Message, state: FSMContext):
     await message.answer("Думаю...")
-    reply = await ask_gpt(user_message=message.text)
+    reply = await ask_gpt(user_id=message.from_user.id, user_message=message.text)
     await message.answer(reply)
