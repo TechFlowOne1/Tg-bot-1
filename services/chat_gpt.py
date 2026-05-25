@@ -1,25 +1,18 @@
 from openai import AsyncOpenAI
+import config
 
-# class ChatGptService:
-#     def __init__(self, api_key: str):
-#         self.client = AsyncOpenAI(api_key=api_key)
-#
-#     async def ask(self, user_text:str,role_text:str) -> str:
-#         response = await self.clien.chat.completions.create(
-#             model="gpt-3.5-turbo",
-#             messages=[
-#                 {
-#                     "role": "system",
-#                     "content": role_text,
-#                 },
-#                 {
-#                     "role": "user",
-#                     "content": user_text,
-#                 }
-#             ],
-#             max_tokens=700,
-#             temperature=0.4,
-#         )
-#         answer = response.choices[0].message.content
-#         return answer
-#
+client = AsyncOpenAI(api_key=config.token_openai)
+
+async def ask_gpt(user_message: str, temperature: float = 0.3) -> str:
+    """
+    Отправляем запрос в чат GPT и возвращаем ответ
+    Используем аргумент 'temperature' для регулировки строгости ответа
+    """
+    response = await client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "user", "content": user_message}
+        ],
+        temperature=temperature,
+    )
+    return response.choices[0].message.content
