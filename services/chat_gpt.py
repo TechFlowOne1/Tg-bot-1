@@ -1,7 +1,7 @@
 from openai import AsyncOpenAI
 import config
 
-client = AsyncOpenAI(api_key=config.token_openai)
+client = AsyncOpenAI(api_key=config.token_openai_key)
 
 async def ask_gpt(user_message: str, temperature: float = 0.3) -> str:
     """
