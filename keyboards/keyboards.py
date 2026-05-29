@@ -16,7 +16,7 @@ button8 = types.KeyboardButton(text="Разговор")
 
 keyboard1 = [
     [button1, button2, button3],
-    [button5],
+    [button5, button8],
 ]
 
 keyboard2 = [
