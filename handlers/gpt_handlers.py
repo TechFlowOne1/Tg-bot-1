@@ -4,7 +4,7 @@ from aiogram.fsm.state import State, StatesGroup
 from services.chat_gpt import ask_gpt
 from aiogram.types import FSInputFile
 from keyboards.keyboards import gpt_exit_keyboard, kb1
-
+from services.chat_gpt import user_history
 
 router = Router()
 
@@ -24,6 +24,7 @@ async def ask_gpt_start(message: types.Message, state: FSMContext):
 
 @router.message(GPTStates.wait_for_question, F.text == "Выйти из режима GPT")
 async def exit_gpt_mode(message: types.Message, state: FSMContext):
+    user_history[message.from_user.id] = []
     await state.clear()
     await message.answer("Вы вышли из режима GPT", reply_markup=kb1)
 

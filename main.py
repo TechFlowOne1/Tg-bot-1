@@ -2,7 +2,7 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher
 import config
-from handlers import common, echo, gpt_handlers, inline_handlers
+from handlers import common, echo, gpt_handlers, inline_handlers, fact_handlers
 
 async def main():
     TOKEN_TG = config.token_telegram
@@ -16,6 +16,7 @@ async def main():
 
     dp.include_router(common.router)
     dp.include_router(gpt_handlers.router)
+    dp.include_router(fact_handlers.router)
     dp.include_router(echo.router)
 
     await dp.start_polling(bot)

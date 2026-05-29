@@ -14,9 +14,10 @@ async def ask_gpt(user_id: int, user_message: str, temperature: float = 0.3) -> 
     if user_id not in user_history:
         user_history[user_id] = []
         user_history[user_id].append({"role": "system", "content": "Ты полезный бот-помощник."})
+    user_history[user_id].append({"role": "user", "content": user_message})
 
     response = await client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=user_history[user_id],
         temperature=temperature,
     )
