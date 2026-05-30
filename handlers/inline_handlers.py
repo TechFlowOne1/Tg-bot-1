@@ -1,5 +1,5 @@
 from aiogram import Router, F
-from aiogram.types import Message, CallbackQuery, FSInputFile
+from aiogram.types import Message, CallbackQuery, FSInputFile, ReplyKeyboardRemove
 from aiogram.filters import Command
 from services.chat_gpt import ask_gpt, user_history
 from keyboards.inline_keyboard import talk_inline_keyboard, talk_finish_keyboard
@@ -55,7 +55,10 @@ async def choose_character(callback: CallbackQuery):
     }
 
     await callback.answer()
-    await callback.message.answer(text=greetings[selected_hero])
+    await callback.message.answer(
+        text=greetings[selected_hero],
+        reply_markup=ReplyKeyboardRemove()
+    )
 
     @router.message(F.text)
     async def handle_talk_message(message: Message):
