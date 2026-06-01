@@ -2,8 +2,9 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher
 import config
-from handlers import common, echo, gpt_handlers, inline_handlers, fact_handlers, quiz_handlers
+from handlers import common, echo, gpt_handlers, inline_handlers, fact_handlers, quiz_handlers, translate_handlers
 from handlers import inline_handlers
+from handlers.translate_handlers import translate_router
 
 async def main():
     TOKEN_TG = config.token_telegram
@@ -18,6 +19,7 @@ async def main():
     # Эхо бота. Обязательно должен стоять последним, иначе будет ловить ЛЮБЫЕ сообщения в чат
     # Что нам конечно же не нужно, иначе ничего не отработает из-за перехватки эхо ботом
 
+    dp.include_router(translate_router)
     dp.include_router(common.router)
     dp.include_router(gpt_handlers.router)
     dp.include_router(fact_handlers.router)

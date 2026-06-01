@@ -3,7 +3,8 @@ from aiogram.types import Message, CallbackQuery, FSInputFile, ReplyKeyboardRemo
 from aiogram.filters import Command
 from services.chat_gpt import ask_gpt, user_history
 from keyboards.inline_keyboard import talk_inline_keyboard, talk_finish_keyboard
-from keyboards.keyboards import kb1
+from keyboards.keyboards import kb1, talk_stop_keyboard
+from aiogram.fsm.context import FSMContext
 
 router = Router()
 
@@ -18,7 +19,7 @@ async def start_talk_mode(message: Message):
         Сразу отправляет сообщение "Ван момент...", чтобы показать, что бот не завис.
     """
 
-    await message.answer("Ван момент, подгружаю список персонажей...")
+    await message.answer("Ван момент, подгружаю список персонажей...", reply_markup=talk_stop_keyboard)
 
     photo = FSInputFile("assets/talk.jpg")
 
@@ -87,3 +88,8 @@ async def choose_character(callback: CallbackQuery):
 
         else:
             return
+
+@router.message(F.text == "Выйти из разговора")
+async def exit_talk_mode(message: Message, state: FSMContext):
+    await state.clear()
+    await message.answer("Режим разговора завершен. Возвращаюсь в главное меню.", reply_markup=kb1)

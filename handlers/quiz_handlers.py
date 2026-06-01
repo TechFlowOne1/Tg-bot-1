@@ -1,9 +1,10 @@
 from aiogram import Router, F
+from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery, FSInputFile, ReplyKeyboardRemove
-from aiogram.filters import Command
+from aiogram.filters import Command, StateFilter
 from services.chat_gpt import ask_gpt, user_history
 from keyboards.quiz_keyboard import quiz_inline_keyboard, quiz_control_keyboard
-from keyboards.keyboards import kb1
+from keyboards.keyboards import kb1, quiz_stop_keyboard
 
 router = Router()
 
@@ -18,8 +19,10 @@ router = Router()
 
 @router.message(Command("quiz"))
 @router.message(F.text == "Квиз")
-async def start_quiz_mode(message: Message):
-    await message.answer("Секунду, подгружаю темы для квиза...")
+async def start_quiz_mode(message: Message, state: FSMContext):
+    await state.clear()  # Принудительно гасим любые состояния из других режимов (например если нажимали GPT)
+    await message.answer("Запускаю квиз...", reply_markup=ReplyKeyboardRemove())
+    await message.answer("Секунду, подгружаю темы для квиза...", reply_markup=quiz_stop_keyboard)
 
     #Достаём заготовленную фотку из "assets"
     photo = FSInputFile("assets/quiz.jpg")
