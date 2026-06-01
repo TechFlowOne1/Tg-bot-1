@@ -12,11 +12,13 @@ button7 = types.KeyboardButton(text="Закончить")
 
 button8 = types.KeyboardButton(text="Разговор")
 
+button9 = types.KeyboardButton(text="Квиз")
+
 
 
 keyboard1 = [
     [button1, button2, button3],
-    [button5, button8],
+    [button5, button8, button9],
 ]
 
 keyboard2 = [
