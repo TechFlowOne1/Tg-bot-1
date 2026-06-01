@@ -8,6 +8,15 @@ router = Router()
 
 @router.message(F.text == "Рандомный факт")
 async def send_random_fact(message: Message):
+    """
+        Отправляет пользователю случайный научный факт через ChatGPT
+
+        Инициализирует пустую историю в 'user_history' по ID пользователя если его там нет.
+        Сразу кидает сообщение 'Думаю...', чтобы юзер видел активность бота, иначе не понятно что произошло
+        Запрашивает у GPT короткий факт. В промпте прописано требование менять темы
+        при повторных запросах, чтобы факты не дублировались
+    """
+
     user_key = f"fact_{message.from_user.id}"
     if user_key not in user_history:
         user_history[user_key] = []
@@ -24,6 +33,9 @@ async def send_random_fact(message: Message):
         text=fact,
         reply_markup=fact_keyboard
     )
+
+
+# Ну тут думаю понятно, просто хэндлеры кнопок "Еще факт" и "Закончить"
 
 @router.message(F.text == "Ещё факт")
 async def handle_more_fact(message: Message):

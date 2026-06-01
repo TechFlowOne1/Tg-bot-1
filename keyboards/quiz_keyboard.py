@@ -1,5 +1,8 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+# Инлайн кнопочки для квиза, решил добавить эмодзи для более приятного UX
+# Эмодзи подсказала нейронка, решил что совет годный и оставил (Почти все боты которые я видел их используют)
+
 # Клавиатура для выбора темы квиза
 quiz_inline_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[

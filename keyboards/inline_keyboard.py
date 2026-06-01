@@ -1,5 +1,8 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+# Инлайн кнопочки наши для "Разговор с известной личностью"
+# Максимально простые, сделал не с первого раза ((
+
 talk_inline_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [

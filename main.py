@@ -14,6 +14,9 @@ async def main():
     bot = Bot(token=TOKEN_TG)
     dp = Dispatcher()
 
+    # Здесь мы подрубаем роутеры в любом порядке, КРОМЕ
+    # Эхо бота. Обязательно должен стоять последним, иначе будет ловить ЛЮБЫЕ сообщения в чат
+    # Что нам конечно же не нужно, иначе ничего не отработает из-за перехватки эхо ботом
 
     dp.include_router(common.router)
     dp.include_router(gpt_handlers.router)

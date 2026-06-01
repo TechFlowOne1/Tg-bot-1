@@ -10,6 +10,14 @@ router = Router()
 @router.message(Command("talk"))
 @router.message(F.text == "Разговор")
 async def start_talk_mode(message: Message):
+    """
+        Запускает режим диалогов и предлагает пользователю выбрать персонажа для общения.
+
+
+        Срабатывает, когда юзер пишет команду /talk или нажимает кнопку "Разговор".
+        Сразу отправляет сообщение "Ван момент...", чтобы показать, что бот не завис.
+    """
+
     await message.answer("Ван момент, подгружаю список персонажей...")
 
     photo = FSInputFile("assets/talk.jpg")
