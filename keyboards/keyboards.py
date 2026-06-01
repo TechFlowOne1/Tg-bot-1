@@ -19,6 +19,8 @@ button11 = types.KeyboardButton(text="Выйти из разговора")
 
 button12 = types.KeyboardButton(text="Закончить квиз")
 
+button13 = types.KeyboardButton(text="Выйти из переводчика")
+
 
 
 # Я подумал, избавиться от кнопки ИНФО (она была button2) и тупо сделать кнопку СТАРТ сразу с приветствием и всей инфой
@@ -51,6 +53,11 @@ quiz_stop_layout = [
     [button12]
 ]
 
+translate_stop_layout = [
+    [button13]
+]
+
+
 # Собираем все клавиатуры
 
 start_kb = types.ReplyKeyboardMarkup(keyboard=start_keyboard_layout, resize_keyboard=True, one_time_keyboard=True)
@@ -64,6 +71,9 @@ fact_keyboard = types.ReplyKeyboardMarkup(keyboard=keyboard3, resize_keyboard=Tr
 talk_stop_keyboard = types.ReplyKeyboardMarkup(keyboard=talk_stop_layout, resize_keyboard=True)
 
 quiz_stop_keyboard = types.ReplyKeyboardMarkup(keyboard=quiz_stop_layout, resize_keyboard=True)
+
+translate_stop_keyboard = types.ReplyKeyboardMarkup(keyboard=translate_stop_layout, resize_keyboard=True)
+
 
 
 

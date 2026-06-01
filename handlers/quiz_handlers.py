@@ -119,6 +119,16 @@ async def choose_quiz_topic(callback: CallbackQuery):
     # Выводим вопрос юзеру и убираем реплай клавиатуру. Иначе не удобно
     await callback.message.answer(text=question, reply_markup=ReplyKeyboardRemove())
 
+@router.message(F.text == "Закончить квиз", StateFilter("*"))
+async def exit_quiz_mode_reply(message: Message, state: FSMContext):
+    user_key = f"quiz_{message.from_user.id}"
+    user_history[user_key] = None
+    await state.clear()
+    await message.answer(
+        text="Квиз окончен! Возвращаюсь в главное меню.",
+        reply_markup=kb1
+    )
+
 
 #Хватаем ответ пользователя и обрабатываем
 

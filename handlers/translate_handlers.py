@@ -5,17 +5,26 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
 
 from keyboards.translate_keyboards import lang_keyboard, translate_control_keyboard
-from keyboards.keyboards import kb1
+from keyboards.keyboards import kb1, translate_stop_keyboard
 from services.chat_gpt import ask_gpt, user_history
-from aiogram.filters import Command
+from aiogram.filters import Command, StateFilter
 
 translate_router = Router()
+
 
 # Создаем состояния для переводчика
 
 class TranslateStates(StatesGroup):
     wait_for_lang = State()     # Ждем, пока юзер тыкнет на язык
     wait_for_text = State()     # Ждем текст для перевода
+
+@translate_router.message(F.text == "Выйти из переводчика", StateFilter("*"))
+async def exit_translate_mode_reply(message: Message, state: FSMContext):
+    await state.clear()
+    await message.answer(
+        text="Режим переводчика отключен. Возвращаюсь в главное меню.",
+        reply_markup=kb1
+    )
 
 
 # Нажатие на кнопку "Переводчик" в главном меню
@@ -27,6 +36,10 @@ async def start_translate_mode(message: Message, state: FSMContext):
     await message.answer(
         text="Выбери язык, на который нужно перевести текст:",
         reply_markup=lang_keyboard
+    )
+    await message.answer(
+        text="Режим переводчика:",
+        reply_markup=translate_stop_keyboard
     )
 
 
