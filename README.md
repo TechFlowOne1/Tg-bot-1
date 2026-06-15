@@ -58,3 +58,33 @@ OPENAI_API_KEY=ВАШ_ОПЕНАИ_ТОКЕН
 ```bash
 python main.py
 ```
+
+## 📷 Скриншоты работы бота
+
+<details>
+<summary><b>Нажмите, чтобы развернуть и посмотреть скриншоты интерфейса</b></summary>
+
+### 🏁 Запуск бота
+![Старт бота](assets_for_mentor/start.jpg)
+
+### 🧠 Чат с искусственным интеллектом (ChatGPT)
+![Чат GPT](assets_for_mentor/chat.jpg)
+
+### 🎮 Интерактивный квиз (Викторина)
+![Квиз часть 1](assets_for_mentor/quiz.jpg)
+![Квиз часть 2](assets_for_mentor/quiz2.jpg)
+![Квиз часть 3](assets_for_mentor/quiz3.jpg)
+![Квиз часть 4](assets_for_mentor/quiz4.jpg)
+
+### 🌍 Модуль переводчика
+![Перевод текста 1](assets_for_mentor/translater1.jpg)
+![Перевод текста 2](assets_for_mentor/translater2.jpg)
+
+### 💡 Интересные факты
+![Случайный факт 1](assets_for_mentor/fact1.jpg)
+![Случайный факт 2](assets_for_mentor/fact2.jpg)
+
+### 💻 Консоль разработчика
+![Консоль](assets_for_mentor/console.jpg)
+
+</details>
